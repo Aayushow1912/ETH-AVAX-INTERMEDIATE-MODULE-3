@@ -32,4 +32,8 @@ contract MyERC20Token {
         balances[msg.sender] -= amount;
         balances[to] += amount;
     }
+    function balanceOf(address account) public view returns (uint) {
+        return balances[account];
+    }
 }
+
