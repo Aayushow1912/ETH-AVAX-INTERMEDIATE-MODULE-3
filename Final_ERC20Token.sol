@@ -2,7 +2,7 @@
 pragma solidity ^0.8.9;
 
 contract MyERC20Token {
-    string public name = "";
+    string public name = "MotorBike";
     string public symbol = "MTK";
     uint public decimals = 18;
     uint public totalSupply = 100000000 * (10 ** decimals);
