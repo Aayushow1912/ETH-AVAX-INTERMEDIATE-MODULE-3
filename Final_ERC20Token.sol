@@ -1,39 +1,32 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-contract MyERC20Token {
-    string public name = "MotorBike";
-    string public symbol = "MTK";
-    uint public decimals = 18;
-    uint public totalSupply = 100000000 * (10 ** decimals);
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-    address public owner;
-    mapping(address => uint) public balances;
+contract MyCrypto is ERC20{
+   address public owner;
 
-    constructor() {
-        owner = msg.sender;
-        balances[owner] = totalSupply;
-    }
+   modifier Owner(){
+    require(msg.sender == owner,"Only Owner can access the tokens");
+    _;
+   }
+   constructor() ERC20("Ubuntu","UB"){
+    _mint(msg.sender,50*10**18);
+    owner = msg.sender;
+   }
 
-    function mint(address to, uint amount) public {
-        require(msg.sender == owner, "Only owner can mint");
-        require(amount > 0, "Invalid amount");
-        balances[to] += amount;
-    }
+   function MintTokens(address to, uint256 amount) external Owner{
+    _mint(to,amount);
+   }
 
-    function burn(uint amount) public {
-        require(amount > 0, "Invalid amount");
-        balances[msg.sender] -= amount;
-    }
+    function TransferTokens(address to, uint256 amount) public  returns(bool) {
+    _transfer(msg.sender,to,amount);
+    return true;
+   }
 
-    function transfer(address to, uint amount) public {
-        require(amount > 0, "Invalid amount");
-        require(balances[msg.sender] >= amount, "Insufficient balance");
-        balances[msg.sender] -= amount;
-        balances[to] += amount;
-    }
-    function balanceOf(address account) public view returns (uint) {
-        return balances[account];
-    }
+    function BurnTokens(uint256 amount) external Owner{
+    _mint(msg.sender,amount);
+   }
 }
 
