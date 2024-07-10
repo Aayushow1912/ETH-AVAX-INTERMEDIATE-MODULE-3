@@ -16,7 +16,7 @@ Once you are on the Remix website, create a new file by clicking on the "+" icon
 
 ### Executing program
 
-* Compile the program by Auto-Compiling.
+* Compile the program by Auto-Compiling or click on Compile button.
   
 * Deploy the smart contract under the Deploy & Run Transactions.
 
