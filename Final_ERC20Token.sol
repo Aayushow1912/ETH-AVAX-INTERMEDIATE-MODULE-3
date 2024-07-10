@@ -26,7 +26,7 @@ contract MyCrypto is ERC20{
    }
 
     function BurnTokens(uint256 amount) external Owner{
-    _mint(msg.sender,amount);
+    _burn(msg.sender,amount);
    }
 }
 
